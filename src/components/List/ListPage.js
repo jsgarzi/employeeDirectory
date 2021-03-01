@@ -17,11 +17,28 @@ class ListPage extends Component {
             }))
     }
 
+    sort = () => {
+
+    }
+    
+    search = (event) => {
+        event.preventDefault();
+        let searchInput = event.target.value;
+        let updatedList = this.state.incomingData.filter(e => {
+            if (e.name.first.toLowerCase().includes(searchInput.toLowerCase()) 
+            || e.name.last.toLowerCase().includes(searchInput.toLowerCase()) ){
+                return e
+            }
+        })
+        this.setState({exportingData : updatedList}) 
+    }
+
     render() {
         return (
             <div>
                 <Navbar 
-                
+                    sort = {this.sort}
+                    search = {this.search}
                 />
                 <table className="table">
                     <thead>
