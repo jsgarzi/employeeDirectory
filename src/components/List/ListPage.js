@@ -18,27 +18,41 @@ class ListPage extends Component {
     }
 
     sort = () => {
+        let list = this.state.exportingData
+        console.log(this.state.exportingData[0].dob.age)
+        console.log(this.state.exportingData[24].dob.age)
+        if (list[0].dob.age > list[1].dob.age) {            
+            list.sort(function (a, b) {
+                return a.dob.age - b.dob.age
+            })
+        }
+        else {
+            list.sort(function (a, b) {
+                return b.dob.age - a.dob.age
+            }
+        )}
 
+        this.setState({ exportingData: list })
     }
-    
+
     search = (event) => {
         event.preventDefault();
         let searchInput = event.target.value;
         let updatedList = this.state.incomingData.filter(e => {
-            if (e.name.first.toLowerCase().includes(searchInput.toLowerCase()) 
-            || e.name.last.toLowerCase().includes(searchInput.toLowerCase()) ){
+            if (e.name.first.toLowerCase().includes(searchInput.toLowerCase())
+                || e.name.last.toLowerCase().includes(searchInput.toLowerCase())) {
                 return e
             }
         })
-        this.setState({exportingData : updatedList}) 
+        this.setState({ exportingData: updatedList })
     }
 
     render() {
         return (
             <div>
-                <Navbar 
-                    sort = {this.sort}
-                    search = {this.search}
+                <Navbar
+                    sort={this.sort}
+                    search={this.search}
                 />
                 <table className="table">
                     <thead>
@@ -52,7 +66,7 @@ class ListPage extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.exportingData.map((e,i) => {
+                        {this.state.exportingData.map((e, i) => {
                             return (
                                 <tr>
                                     <th scope="row">{i + 1}</th>
@@ -63,7 +77,7 @@ class ListPage extends Component {
                                     <td>{e.dob.age}</td>
                                 </tr>
                             )
-                            })
+                        })
                         }
                     </tbody>
                 </table>
