@@ -20,6 +20,9 @@ class ListPage extends Component {
     render() {
         return (
             <div>
+                <Navbar 
+                
+                />
                 <table className="table">
                     <thead>
                         <tr>
